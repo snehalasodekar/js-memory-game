@@ -32,38 +32,51 @@
         location.reload();
         shuffle(imgArray);
     });
+
+
     const targetContainer = document.querySelector("#target");
     var cols = 4;
-    //var colClass = "col-md-"+cols+1;
     var rows = imgArray.length / cols; // number of rows need to load
     var len = imgArray.length - 1;
-        for(let i = 0;i<rows;i++){
-            let rowDiv = document.createElement("div");
-            rowDiv.classList.add("row");
-             for(let j = 0; j< cols;j++){
-                 let colDiv = document.createElement("div");
-                     colDiv.classList.add("col-6", "col-md-3","flip-box", "border","text-center");
-                    let fboxInnerDiv = document.createElement("div");
-                        fboxInnerDiv.classList.add("flip-box-inner");
-                        let fboxFrontImgDiv = document.createElement("div");
-                        fboxFrontImgDiv.classList.add("flip-box-front")
-                        let fboxBackDiv = document.createElement("div");
-                        fboxBackDiv.classList.add("flip-box-back","text-center", "align-items-center");
-                     let imgTag = document.createElement("img");
-                 if(len >= 0){
-                      imgTag.src = imgArray[len];
-                   // console.log("len = "+len+" src = "+imgArray[len]);
-                     len--;
-                 }
-                 fboxBackDiv.innerText = "Click me to flip";
-                 fboxFrontImgDiv.appendChild(imgTag);
-                 fboxInnerDiv.appendChild(fboxFrontImgDiv);
-                 fboxInnerDiv.appendChild(fboxBackDiv);
-                 colDiv.appendChild(fboxInnerDiv);
-                 rowDiv.appendChild(colDiv);
-             }
-             targetContainer.appendChild(rowDiv);
+    /**
+     * Create rows and columns according to the array elements
+     * Also add flip classes and their divs
+     */
+    
+    for(let i = 0;i<rows;i++){
+        // targetContainer[i].innerHtml=`<div class="row">`;
+        let rowDiv = document.createElement("div");
+        rowDiv.classList.add("row");
+        for(let j = 0; j< cols;j++){
+            if(len >= 0){ //console.log("i = "+i+" j = "+j+"Len = "+len);
+                var column = `<div class="col-6 col-md-3 flip-box border text-center">
+                                    <div class="flipImgContainer">
+                                        <div class="frontImage"><img src="${imgArray[len]}" alt="${imgArray[len]}"/></div>
+                                        <div class="backImg text-center">CLICK ME </div>
+                                    </div>
+                                </div>`;
+                                len--;
+                               // console.log("column = "+column);
+                                
+                        }
+            rowDiv.innerHTML += column;
+            //console.log("j = "+j);
         }
-        
+        targetContainer.appendChild(rowDiv);
+       // console.log("i = "+i);
+    }
+    /**
+     * On click of image flip it
+     */
+    var flipImgContainer = document.querySelectorAll(".flipImgContainer");
 
+    console.log(flipImgContainer);
+
+   
+   
+    flipImgContainer.forEach((image,index) => {
+        //console.log(element);
+        
+    });
+    
 })();
