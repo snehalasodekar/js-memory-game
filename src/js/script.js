@@ -51,8 +51,8 @@
             if(len >= 0){ //console.log("i = "+i+" j = "+j+"Len = "+len);
                 var column = `<div class="col-6 col-md-3 flip-box border text-center">
                                     <div class="flipImgContainer">
-                                        <div class="frontImage"><img src="${imgArray[len]}" alt="${imgArray[len]}"/></div>
-                                        <div class="backImg text-center">CLICK ME </div>
+                                        <div class="frontImage">CLICK ME</div>
+                                        <div class="backImg text-center"><img src="${imgArray[len]}" alt="${imgArray[len]}"/> </div>
                                     </div>
                                 </div>`;
                                 len--;
@@ -68,15 +68,40 @@
     /**
      * On click of image flip it
      */
-    var flipImgContainer = document.querySelectorAll(".flipImgContainer");
-
-    console.log(flipImgContainer);
-
-   
-   
-    flipImgContainer.forEach((image,index) => {
-        //console.log(element);
-        
+    var flipImages = document.querySelectorAll(".flipImgContainer");
+    var mouseClicks = 0; // to check when to remove and add flip class.
+    var imgMachFoundCnt = 0; // to find result
+    var prevClickImgIndex; // compare if two images match or not
+    
+    flipImages.forEach((image,index) => {
+        image.addEventListener("click",()=>{
+           
+            if (mouseClicks !== 2){
+                image.classList.add("flipImg");
+                mouseClicks++;
+                if (mouseClicks === 1){
+                    prevClickImgIndex = index;
+                }
+                if (mouseClicks === 2){
+    
+                    if (image.querySelector("img").src !== flipImages[prevClickImgIndex].querySelector("img").src){
+                        
+                        setTimeout(() => {
+                            flipImages[prevClickImgIndex].classList.remove("flipImg");
+                            image.classList.remove("flipImg");
+                            mouseClicks = 0;
+                        }, 1000);
+                    } else {
+                        imgMachFoundCnt++;
+                        setTimeout(() => mouseClicks = 0, 1000);
+                    }
+    
+                    if (imgMachFoundCnt === imgOriginalArray.length){
+                        document.getElementById("roundNumMsg").innerHTML = `Yo win the game try again`;
+                    }/**/
+                }
+            };
+        });
     });
     
 })();

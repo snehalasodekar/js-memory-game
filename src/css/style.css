@@ -20,9 +20,13 @@
     transform-style: preserve-3d;
   }
   
-  .flip-box:hover .flipImgContainer {
+  .flipImg {
+    -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
-  }
+-webkit-transition: -webkit-transform 0.5s;
+transition: -webkit-transform 0.5s;
+transition: transform 0.5s;
+transition: transform 0.5s, -webkit-transform 0.5s;  }
   
   .frontImage, .backImg {
     position: absolute;
@@ -41,4 +45,13 @@
     background-color: #555;
     color: white;
     transform: rotateY(180deg);
+    position: relative;
+  }
+  .backImg img{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
