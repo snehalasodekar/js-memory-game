@@ -7,10 +7,13 @@
         './src/images/koala.png',
         './src/images/fox.png',
         './src/images/turtle.png',
-        './src/images/lion.png',
+        './src/images/lion.png'
+    ];
+    /**
+     * ,
         './src/images/hen.png',
         './src/images/elephant.png',
-    ];
+     */
   //  console.log("new Array = "+imgArray);
     /**
      * doubling array elements as each image has match
@@ -44,26 +47,22 @@
      */
     
     for(let i = 0;i<rows;i++){
-        // targetContainer[i].innerHtml=`<div class="row">`;
         let rowDiv = document.createElement("div");
-        rowDiv.classList.add("row");
+        rowDiv.classList.add("row","m-3");
         for(let j = 0; j< cols;j++){
-            if(len >= 0){ //console.log("i = "+i+" j = "+j+"Len = "+len);
+            if(len >= 0){
                 var column = `<div class="col-6 col-md-3 flip-box border text-center">
                                     <div class="flipImgContainer">
-                                        <div class="frontImage">CLICK ME</div>
+                                        <div class="frontImage"><p>CLICK ME</p></div>
                                         <div class="backImg text-center"><img src="${imgArray[len]}" alt="${imgArray[len]}"/> </div>
                                     </div>
                                 </div>`;
                                 len--;
-                               // console.log("column = "+column);
-                                
+  
                         }
             rowDiv.innerHTML += column;
-            //console.log("j = "+j);
         }
         targetContainer.appendChild(rowDiv);
-       // console.log("i = "+i);
     }
     /**
      * On click of image flip it

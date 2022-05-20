@@ -6,7 +6,7 @@
     grid-row-gap: 0px;
 }
 .flip-box {
-    width: 300px;
+    width: 200px;
     height: 200px;
     perspective: 1000px;
   }
@@ -47,11 +47,14 @@ transition: transform 0.5s, -webkit-transform 0.5s;  }
     transform: rotateY(180deg);
     position: relative;
   }
-  .backImg img{
+  .backImg img, .frontImage p{
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
+  }
+  .frontImage p{
+    margin:50px;
   }
